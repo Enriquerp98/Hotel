@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyDECoXfn0r0QJ7207jV7WB3fM2DF-4cdlw",
-    authDomain: "hotel-b74b2.firebaseapp.com",
-    databaseURL: "https://hotel-b74b2.firebaseio.com",
-    projectId: "hotel-b74b2",
-    storageBucket: "hotel-b74b2.appspot.com",
-    messagingSenderId: "592462817136",
-    appId: "1:592462817136:web:294e9da94ea91b239491b5"
+    apiKey: 'AIzaSyDECoXfn0r0QJ7207jV7WB3fM2DF-4cdlw',
+    authDomain: 'hotel-b74b2.firebaseapp.com',
+    databaseURL: 'https://hotel-b74b2.firebaseio.com',
+    projectId: 'hotel-b74b2',
+    storageBucket: 'hotel-b74b2.appspot.com',
+    messagingSenderId: '592462817136',
+    appId: '1:592462817136:web:294e9da94ea91b239491b5'
 
   }
 };

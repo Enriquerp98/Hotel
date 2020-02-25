@@ -9,16 +9,16 @@ export class FirestoreService {
 
   constructor(private firestore: AngularFirestore) { }
 
-//Crea una habitación
+// Crea una habitación
   public createHab(data: {planta: string, habitacion: string}) {
     return this.firestore.collection('habs').add(data);
-  }  //Obtiene una habitacion
+  }  // Obtiene una habitacion
   public getHab(documentId: string) {
     return this.firestore.collection('habs').doc(documentId).snapshotChanges();
-  }  //Obtiene todas las habitaciones
+  }  // Obtiene todas las habitaciones
   public getHabs() {
     return this.firestore.collection('habs').snapshotChanges();
-  }  //Actualiza una habitacion
+  }  // Actualiza una habitacion
   public updateHab(documentId: string, data: any) {
     return this.firestore.collection('habs').doc(documentId).set(data);
   }

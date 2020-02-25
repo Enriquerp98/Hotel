@@ -1,21 +1,27 @@
 <div class="grd">
   <div class="grd-row">
     <div class="grd-row-col-2">
-      <h1>Habitaciones</h1>
-      <form>
-        <label for="planta">Planta</label><input type="text" name="planta"><br>
-        <label for="habitacion">Imagen</label><input type="text" name="habitacion"><br>
-        <input type="submit" class="btn--blue btn--add" value="Agregar">
+      <h1>Agregar habitación</h1>
+      <form (ngSubmit)="newHab(newHabForm.value)" [formGroup]="newHabForm">
+        <input type="hidden" formControlName="id">
+
+        <label for="planta">Nombre</label>
+        <input class="form-control col-2" type="number" formControlName="planta">
+
+        <label for="habitacion">Imagen</label>
+        <input class="form-control col-2" type="number" formControlName="habitacion">
+
+        <input type="submit" class="btn--blue btn--add" [disabled]="!newHabForm.valid" value="Agregar">
       </form>
     </div>
     <div class="grd-row-col-4">
       <div class="cats_container">
-        <div class="media" *ngFor="let hab of habs">
+        <div class="bg-primary" *ngFor="let hab of habs">
           <div class="media-figure">
-            <button class="bg-danger">{{hab.data.url}}</button>
+            <p>Planta: {{hab.data.planta}}</p>
           </div>
           <div class="media-body">
-            <p>{{hab.data.nombre}}</p>
+            <p>Habitacion: {{hab.data.habitacion}}</p>
             <div class="btn--group">
               <button class="btn--green btn--s btn1">Editar</button>
               <button class="btn--red btn--s btn2">Eliminar</button>
