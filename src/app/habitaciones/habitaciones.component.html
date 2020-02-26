@@ -5,29 +5,37 @@
       <form (ngSubmit)="newHab(newHabForm.value)" [formGroup]="newHabForm">
         <input type="hidden" formControlName="id">
 
-        <label for="planta">Nombre</label>
+        <label for="planta">Planta</label>
         <input class="form-control col-2" type="number" formControlName="planta">
 
-        <label for="habitacion">Imagen</label>
+        <label for="habitacion">Habitacion</label>
         <input class="form-control col-2" type="number" formControlName="habitacion">
 
-        <input type="submit" class="btn--blue btn--add" [disabled]="!newHabForm.valid" value="Agregar">
+        <input type="submit" class="btn btn-danger" [disabled]="!newHabForm.valid" value="Agregar">
       </form>
     </div>
     <div class="grd-row-col-4">
-      <div class="cats_container">
-        <div class="bg-primary" *ngFor="let hab of habs">
-          <div class="media-figure">
-            <p>Planta: {{hab.data.planta}}</p>
-          </div>
-          <div class="media-body">
-            <p>Habitacion: {{hab.data.habitacion}}</p>
-            <div class="btn--group">
-              <button class="btn--green btn--s btn1">Editar</button>
-              <button class="btn--red btn--s btn2">Eliminar</button>
-            </div>
-          </div>
-        </div>
+      <div class="bg-body habs">
+        <table class="table">
+          <thead class="thead-dark">
+          <tr style="text-align:center;">
+            <th scope="col">Planta</th>
+            <th scope="col">Habitación</th>
+            <th scope="col">¿Libre?</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let hab of habs" style="text-align:center;">
+              <th scope="row">{{hab.data.planta}}</th>
+              <th>{{hab.data.habitacion}}</th>
+              <th id="libre" name="libre" >[disabled]="hab.libre"</th>
+              <th><button class="btn btn-danger" (click)="editHab(hab.id)"><strong>Editar</strong></button></th>
+              <th><button class="btn btn-danger" (click)="deleteHab(hab.id)"><strong>Eliminar</strong></button></th>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

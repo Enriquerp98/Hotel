@@ -22,4 +22,7 @@ export class FirestoreService {
   public updateHab(documentId: string, data: any) {
     return this.firestore.collection('habs').doc(documentId).set(data);
   }
+  public deleteHab(documentId: string) { // Para borrar una habitacion
+    return this.firestore.collection('habs').doc(documentId).delete();
+  }
 }

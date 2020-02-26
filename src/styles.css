@@ -8,3 +8,16 @@ footer{
   margin-left:-15px;
   margin-right:-15px;
 }
+.bg-body{
+  background-color: #dadada;
+}
+.habs{
+  border-radius: 0.25em;
+  color:black;
+  margin:10px;
+}
+
+.padding{
+  padding:15px;
+}
+
