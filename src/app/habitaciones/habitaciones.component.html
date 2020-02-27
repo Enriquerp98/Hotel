@@ -30,7 +30,8 @@
             <tr *ngFor="let hab of habs" style="text-align:center;">
               <th scope="row">{{hab.data.planta}}</th>
               <th>{{hab.data.habitacion}}</th>
-              <th id="libre" name="libre" >[disabled]="hab.libre"</th>
+              <th name="libre" class="bg-danger" *ngIf="!hab.data.libre">Ocupada</th>
+              <th name="libre" class="bg-success" *ngIf="hab.data.libre">Libre</th>
               <th><button class="btn btn-danger" (click)="editHab(hab.id)"><strong>Editar</strong></button></th>
               <th><button class="btn btn-danger" (click)="deleteHab(hab.id)"><strong>Eliminar</strong></button></th>
             </tr>

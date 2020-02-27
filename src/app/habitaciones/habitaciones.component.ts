@@ -8,7 +8,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./habitaciones.component.css']
 })
 export class HabitacionesComponent implements OnInit {
-
+  public claseActiva = 'bg-success';
+  public libreText = '';
   public habs = [];
 
   public documentId = null;
@@ -72,7 +73,7 @@ export class HabitacionesComponent implements OnInit {
     const editSubscribe = this.firestoreService.getHab(documentId).subscribe((hab) => {
       this.currentStatus = 2;
       this.documentId = documentId;
-      // console.log(hab.payload.data().habitacion);
+      // console.log(hab.payload.data().libre);
       this.newHabForm.setValue({
         id: documentId,
         // @ts-ignore
@@ -93,6 +94,18 @@ export class HabitacionesComponent implements OnInit {
       console.error(error);
     });
   }
+  public CambiarColor(libre: boolean, id: string) {
+    // Prueba
+    if (libre) {
+      console.log(id + ': Libre - ' + libre);
+      this.claseActiva = 'bg-success';
+      this.libreText = 'Libre';
+    } else {
+      console.log(id + ': Ocupada - ' + libre);
+      this.claseActiva = 'bg-danger';
+      this.libreText = 'Ocupada';
+    }
+  }
   ngOnInit() {
     // document.getElementById('libre').className = 'bg-primary';
     this.firestoreService.getHabs().subscribe((habsSnapshot) => {
@@ -102,6 +115,7 @@ export class HabitacionesComponent implements OnInit {
           id: habData.payload.doc.id,
           data: habData.payload.doc.data()
         });
+        console.log(habData.payload.doc.data().libre);
       });
     });
   }
