@@ -10,12 +10,22 @@ import { environment } from '../environments/environment';
 import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
 //////////////
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HuespedesComponent } from './huespedes/huespedes.component';
+import { MenuComponent } from './menu/menu.component';
+import { FooterComponent } from './footer/footer.component';
+import { ErrorComponent } from './error/error.component';
+import { SobreComponent } from './sobre/sobre.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HabitacionesComponent
+    HabitacionesComponent,
+    HuespedesComponent,
+    MenuComponent,
+    FooterComponent,
+    ErrorComponent,
+    SobreComponent
   ],
   imports: [
     BrowserModule,

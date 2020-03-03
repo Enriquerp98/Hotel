@@ -9,7 +9,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class HabitacionesComponent implements OnInit {
   public claseActiva = 'bg-success';
-  public libreText = '';
+  /*public libreText = '';
+  public booleano = false;*/
   public habs = [];
 
   public documentId = null;
@@ -56,8 +57,12 @@ export class HabitacionesComponent implements OnInit {
       }
       this.firestoreService.updateHab(documentId, data).then(() => {
         this.currentStatus = 1;
+       /* if (this.libreText === 'libre') {
+          this.booleano = true;
+        }
+        console.log('booleano: ' + this.booleano);*/
         this.newHabForm.setValue({
-          libre: true,
+          libre: '',
           planta: '',
           habitacion: '',
           id: ''
@@ -74,6 +79,7 @@ export class HabitacionesComponent implements OnInit {
       this.currentStatus = 2;
       this.documentId = documentId;
       // console.log(hab.payload.data().libre);
+      // console.log(this.libreText);
       this.newHabForm.setValue({
         id: documentId,
         // @ts-ignore
@@ -93,18 +99,6 @@ export class HabitacionesComponent implements OnInit {
     }, (error) => {
       console.error(error);
     });
-  }
-  public CambiarColor(libre: boolean, id: string) {
-    // Prueba
-    if (libre) {
-      console.log(id + ': Libre - ' + libre);
-      this.claseActiva = 'bg-success';
-      this.libreText = 'Libre';
-    } else {
-      console.log(id + ': Ocupada - ' + libre);
-      this.claseActiva = 'bg-danger';
-      this.libreText = 'Ocupada';
-    }
   }
   ngOnInit() {
     // document.getElementById('libre').className = 'bg-primary';

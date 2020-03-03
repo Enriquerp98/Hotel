@@ -1,42 +1,50 @@
-<div class="grd">
-  <div class="grd-row">
-    <div class="grd-row-col-2">
-      <h1>Agregar habitación</h1>
-      <form (ngSubmit)="newHab(newHabForm.value)" [formGroup]="newHabForm">
-        <input type="hidden" formControlName="id">
+<div class="container habs">
+  <div class="grd">
+    <div class="grd-row">
+      <div class="grd-row-col-2">
+        <h1>Formulario habitaciones</h1>
+        <form (ngSubmit)="newHab(newHabForm.value)" [formGroup]="newHabForm">
+          <input type="hidden" formControlName="id">
 
-        <label for="planta">Planta</label>
-        <input class="form-control col-2" type="number" formControlName="planta">
+          <label for="planta">Planta</label>
+          <input class="form-control col-2" type="number" formControlName="planta">
 
-        <label for="habitacion">Habitacion</label>
-        <input class="form-control col-2" type="number" formControlName="habitacion">
+          <label for="habitacion">Habitacion</label>
+          <input class="form-control col-2" type="number" formControlName="habitacion">
 
-        <input type="submit" class="btn btn-danger" [disabled]="!newHabForm.valid" value="Agregar">
-      </form>
-    </div>
-    <div class="grd-row-col-4">
-      <div class="bg-body habs">
-        <table class="table">
-          <thead class="thead-dark">
-          <tr style="text-align:center;">
-            <th scope="col">Planta</th>
-            <th scope="col">Habitación</th>
-            <th scope="col">¿Libre?</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Eliminar</th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let hab of habs" style="text-align:center;">
-              <th scope="row">{{hab.data.planta}}</th>
-              <th>{{hab.data.habitacion}}</th>
-              <th name="libre" class="bg-danger" *ngIf="!hab.data.libre">Ocupada</th>
-              <th name="libre" class="bg-success" *ngIf="hab.data.libre">Libre</th>
-              <th><button class="btn btn-danger" (click)="editHab(hab.id)"><strong>Editar</strong></button></th>
-              <th><button class="btn btn-danger" (click)="deleteHab(hab.id)"><strong>Eliminar</strong></button></th>
+          <!--<label for="disponibilidad">Disponibilidad</label>
+          <select class="form-control col-2" name="disponibilidad" [(ngModel)]="libreText">
+            <option [ngValue]="libre">Libre</option>
+            <option [ngValue]="ocupada">Ocupada</option>
+          </select>-->
+
+          <input type="submit" class="btn btn-danger" [disabled]="!newHabForm.valid" value="Aceptar">
+        </form>
+      </div>
+      <div class="grd-row-col-4">
+        <div class="bg-body habs">
+          <table class="table">
+            <thead class="thead-dark">
+            <tr style="text-align:center;">
+              <th scope="col">Planta</th>
+              <th scope="col">Habitación</th>
+              <th scope="col">Disponibilidad</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
             </tr>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <tr *ngFor="let hab of habs" style="text-align:center;">
+                <th scope="row">{{hab.data.planta}}</th>
+                <th>{{hab.data.habitacion}}</th>
+                <th name="libre" class="bg-danger" *ngIf="!hab.data.libre">Ocupada</th>
+                <th name="libre" class="bg-success" *ngIf="hab.data.libre">Libre</th>
+                <th><button class="btn btn-danger" (click)="editHab(hab.id)"><strong>Editar</strong></button></th>
+                <th><button class="btn btn-danger" (click)="deleteHab(hab.id)"><strong>Eliminar</strong></button></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
