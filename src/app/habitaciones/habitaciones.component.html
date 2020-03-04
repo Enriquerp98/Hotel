@@ -12,11 +12,11 @@
           <label for="habitacion">Habitacion</label>
           <input class="form-control col-2" type="number" formControlName="habitacion">
 
-          <!--<label for="disponibilidad">Disponibilidad</label>
-          <select class="form-control col-2" name="disponibilidad" [(ngModel)]="libreText">
-            <option [ngValue]="libre">Libre</option>
-            <option [ngValue]="ocupada">Ocupada</option>
-          </select>-->
+          <label for="libre">Disponibilidad</label>
+          <select class="form-control col-2" formControlName="libre">
+            <option [value]="true">Libre</option>
+            <option [value]="false">Ocupada</option>
+          </select>
 
           <input type="submit" class="btn btn-danger" [disabled]="!newHabForm.valid" value="Aceptar">
         </form>

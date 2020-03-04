@@ -10,7 +10,7 @@ export class FirestoreService {
   constructor(private firestore: AngularFirestore) { }
 
 // Crea una habitación
-  public createHab(data: {planta: string, habitacion: string}) {
+  public createHab(data: {planta: string, habitacion: string, libre: boolean}) {
     return this.firestore.collection('habs').add(data);
   }  // Obtiene una habitacion
   public getHab(documentId: string) {

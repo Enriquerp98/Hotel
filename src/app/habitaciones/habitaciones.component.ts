@@ -8,9 +8,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./habitaciones.component.css']
 })
 export class HabitacionesComponent implements OnInit {
-  public claseActiva = 'bg-success';
-  /*public libreText = '';
-  public booleano = false;*/
+  public libreText = '';
+  public booleano = false;
   public habs = [];
 
   public documentId = null;
@@ -18,8 +17,8 @@ export class HabitacionesComponent implements OnInit {
   public newHabForm = new FormGroup({
     planta: new FormControl('', Validators.required),
     habitacion: new FormControl('', Validators.required),
-    id: new FormControl(''),
-    libre: new FormControl('', Validators.required)
+    libre: new FormControl('', Validators.required),
+    id: new FormControl('')
   });
 
   constructor(private firestoreService: FirestoreService) {
@@ -27,21 +26,26 @@ export class HabitacionesComponent implements OnInit {
       id: '',
       planta: '',
       habitacion: '',
-      libre: true
+      libre: null
     });
   }
   public newHab(form, documentId = this.documentId) {
     console.log(`Status: ${this.currentStatus}`);
+    if (form.libre === 'true') {
+      this.booleano = true;
+    }
+    console.log('Boolean: ' + this.booleano);
     if (this.currentStatus === 1) {
       const data = {
         planta: form.planta,
         habitacion: form.habitacion,
-        libre: form.libre
+        libre: this.booleano
       }
       this.firestoreService.createHab(data).then(() => {
         console.log('Documento creado exitósamente!');
+        this.booleano = false;
         this.newHabForm.setValue({
-          libre: true,
+          libre: '',
           planta: '',
           habitacion: '',
           id: ''
@@ -50,17 +54,18 @@ export class HabitacionesComponent implements OnInit {
         console.error(error);
       });
     } else {
+      if (form.libre === 'true') {
+        this.booleano = true;
+      }
+      console.log('Boolean 2: ' + this.booleano);
       const data = {
-        libre: true,
+        libre: this.booleano,
         planta: form.planta,
         habitacion: form.habitacion
       }
       this.firestoreService.updateHab(documentId, data).then(() => {
+        this.booleano = false;
         this.currentStatus = 1;
-       /* if (this.libreText === 'libre') {
-          this.booleano = true;
-        }
-        console.log('booleano: ' + this.booleano);*/
         this.newHabForm.setValue({
           libre: '',
           planta: '',
