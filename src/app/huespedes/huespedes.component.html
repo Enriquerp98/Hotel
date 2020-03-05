@@ -1,5 +1,12 @@
 <div class="container habs">
 <h2>Huéspedes (Habitaciones Ocupadas)</h2>
+<div class="container">
+  <form (ngSubmit)="addHues(huespedForm)" [formGroup]="huespedForm">
+    <label>Nombre Huésped: </label><br/>
+    <input type="text" class="form-control col-2" formControlName="huesped"/><br/>
+    <input type="submit" class="btn btn-danger" [disabled]="!huespedForm.valid" value="Guardar huésped" />
+  </form>
+</div><br/>
 
   <div class="grd-row-col-4">
     <div class="bg-body habs">
@@ -15,6 +22,8 @@
         <tr *ngFor="let hab of habsOcupadas" style="text-align:center;">
           <th scope="row" *ngIf="!hab.data.libre">{{hab.data.planta}}</th>
           <th *ngIf="!hab.data.libre">{{hab.data.habitacion}}</th>
+          <th *ngIf="!hab.data.libre && hab.data.huesped!=''">{{hab.data.huesped}}</th>
+          <th *ngIf="!hab.data.libre && hab.data.huesped==''"><button class="btn btn-danger" (click)="editHab(hab.id)"> Añadir Nombre Huesped</button></th>
         </tr>
         </tbody>
       </table>

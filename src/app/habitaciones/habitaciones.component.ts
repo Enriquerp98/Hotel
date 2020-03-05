@@ -18,6 +18,7 @@ export class HabitacionesComponent implements OnInit {
     planta: new FormControl('', Validators.required),
     habitacion: new FormControl('', Validators.required),
     libre: new FormControl('', Validators.required),
+    huesped: new FormControl(''),
     id: new FormControl('')
   });
 
@@ -26,7 +27,8 @@ export class HabitacionesComponent implements OnInit {
       id: '',
       planta: '',
       habitacion: '',
-      libre: null
+      libre: null,
+      huesped: ''
     });
   }
   public newHab(form, documentId = this.documentId) {
@@ -37,6 +39,7 @@ export class HabitacionesComponent implements OnInit {
     console.log('Boolean: ' + this.booleano);
     if (this.currentStatus === 1) {
       const data = {
+        huesped: '',
         planta: form.planta,
         habitacion: form.habitacion,
         libre: this.booleano
@@ -45,6 +48,7 @@ export class HabitacionesComponent implements OnInit {
         console.log('Documento creado exitósamente!');
         this.booleano = false;
         this.newHabForm.setValue({
+          huesped: '',
           libre: '',
           planta: '',
           habitacion: '',
@@ -59,6 +63,7 @@ export class HabitacionesComponent implements OnInit {
       }
       console.log('Boolean 2: ' + this.booleano);
       const data = {
+        huesped: '',
         libre: this.booleano,
         planta: form.planta,
         habitacion: form.habitacion
@@ -67,6 +72,7 @@ export class HabitacionesComponent implements OnInit {
         this.booleano = false;
         this.currentStatus = 1;
         this.newHabForm.setValue({
+          huesped: '',
           libre: '',
           planta: '',
           habitacion: '',
@@ -83,8 +89,6 @@ export class HabitacionesComponent implements OnInit {
     const editSubscribe = this.firestoreService.getHab(documentId).subscribe((hab) => {
       this.currentStatus = 2;
       this.documentId = documentId;
-      // console.log(hab.payload.data().libre);
-      // console.log(this.libreText);
       this.newHabForm.setValue({
         id: documentId,
         // @ts-ignore
@@ -92,7 +96,9 @@ export class HabitacionesComponent implements OnInit {
         // @ts-ignore
         habitacion: hab.payload.data().habitacion,
         // @ts-ignore
-        libre: hab.payload.data().libre
+        libre: hab.payload.data().libre,
+        // @ts-ignore
+        huesped: hab.payload.data().huesped
       });
       editSubscribe.unsubscribe();
     });
@@ -106,7 +112,6 @@ export class HabitacionesComponent implements OnInit {
     });
   }
   ngOnInit() {
-    // document.getElementById('libre').className = 'bg-primary';
     this.firestoreService.getHabs().subscribe((habsSnapshot) => {
       this.habs = [];
       habsSnapshot.forEach((habData: any) => {
