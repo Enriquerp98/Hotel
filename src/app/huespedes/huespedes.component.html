@@ -1,3 +1,23 @@
 <div class="container habs">
-<h2>Huéspedes</h2>
+<h2>Huéspedes (Habitaciones Ocupadas)</h2>
+
+  <div class="grd-row-col-4">
+    <div class="bg-body habs">
+      <table class="table">
+        <thead class="thead-dark">
+        <tr style="text-align:center;">
+          <th scope="col">Planta</th>
+          <th scope="col">Habitación</th>
+          <th scope="col">Huésped</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let hab of habsOcupadas" style="text-align:center;">
+          <th scope="row" *ngIf="!hab.data.libre">{{hab.data.planta}}</th>
+          <th *ngIf="!hab.data.libre">{{hab.data.habitacion}}</th>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

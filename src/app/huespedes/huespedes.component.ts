@@ -7,14 +7,17 @@ import {FirestoreService} from '../services/firestore/firestore.service';
   styleUrls: ['./huespedes.component.css']
 })
 export class HuespedesComponent implements OnInit {
-public habs: any;
-  constructor(private firestoreService: FirestoreService) { }
-
+  public habsOcupadas: any;
+  // Constructor
+  constructor(private firestoreService: FirestoreService) {
+  }
+  // Methods
+  // ngOnInit
   ngOnInit() {
     this.firestoreService.getHabs().subscribe((habsSnapshot) => {
-      this.habs = [];
+      this.habsOcupadas = [];
       habsSnapshot.forEach((habData: any) => {
-        this.habs.push({
+        this.habsOcupadas.push({
           id: habData.payload.doc.id,
           data: habData.payload.doc.data()
         });
