@@ -11,11 +11,11 @@ export class HuespedesComponent implements OnInit {
   public habitaciones = [];
 
   public documentId = null;
-  public currentStatus = 1;
+  public currentStatus = 2;
   public huespedForm = new FormGroup({
-    planta: new FormControl(''),
-    habitacion: new FormControl(''),
-    libre: new FormControl(''),
+    planta: new FormControl('', Validators.required),
+    habitacion: new FormControl('', Validators.required),
+    libre: new FormControl('', Validators.required),
     huesped: new FormControl('', Validators.required),
     id: new FormControl('')
   });
@@ -34,13 +34,13 @@ export class HuespedesComponent implements OnInit {
     console.log(`Status: ${this.currentStatus}`);
     if (this.currentStatus === 2) {
       const data = {
-        huesped: '',
+        huesped: form.huesped,
         libre: form.libre,
         planta: form.planta,
         habitacion: form.habitacion
-      };
+      }
       this.firestoreService.updateHab(documentId, data).then(() => {
-        this.currentStatus = 1;
+        this.currentStatus = 2;
         this.huespedForm.setValue({
           huesped: '',
           libre: '',
@@ -57,10 +57,8 @@ export class HuespedesComponent implements OnInit {
 
   public editHab(documentId) {
     const editSubscribe = this.firestoreService.getHab(documentId).subscribe((hab) => {
-      this.currentStatus = 2;
       this.documentId = documentId;
       // console.log(hab.payload.data().libre);
-      // console.log(this.libreText);
       this.huespedForm.setValue({
         id: documentId,
         // @ts-ignore
