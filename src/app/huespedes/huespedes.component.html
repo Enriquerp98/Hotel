@@ -4,6 +4,9 @@
   <form (ngSubmit)="addHues(huespedForm)" [formGroup]="huespedForm">
     <label>Nombre Huésped: </label><br/>
     <input type="text" class="form-control col-2" formControlName="huesped"/><br/>
+    Planta: <input type="text" class="form-control col-2" formControlName="planta" disabled /><br/>
+    Num: <input type="text" class="form-control col-2" formControlName="habitacion" disabled /><br/>
+    <input type="text" class="form-control col-2" formControlName="libre" style="display:none;" /><br/>
     <input type="submit" class="btn btn-danger" [disabled]="!huespedForm.valid" value="Guardar huésped" />
   </form>
 </div><br/>
@@ -19,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let hab of habsOcupadas" style="text-align:center;">
+        <tr *ngFor="let hab of habitaciones" style="text-align:center;">
           <th scope="row" *ngIf="!hab.data.libre">{{hab.data.planta}}</th>
           <th *ngIf="!hab.data.libre">{{hab.data.habitacion}}</th>
           <th *ngIf="!hab.data.libre && hab.data.huesped!=''">{{hab.data.huesped}}</th>

@@ -8,7 +8,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./huespedes.component.css']
 })
 export class HuespedesComponent implements OnInit {
-  public habs: [];
+  public habitaciones = [];
 
   public documentId = null;
   public currentStatus = 1;
@@ -77,14 +77,14 @@ export class HuespedesComponent implements OnInit {
   }
   // ngOnInit
   ngOnInit() {
-    this.firestoreService.getHabs().subscribe((habsSnapshot) => {
-      this.habs = [];
-      habsSnapshot.forEach((habData: any) => {
-        this.habs.push({
-          id: habData.payload.doc.id,
-          data: habData.payload.doc.data()
+    this.firestoreService.getHabs().subscribe((habitacionesSnapshot) => {
+      this.habitaciones = [];
+      habitacionesSnapshot.forEach((habitacionData: any) => {
+        this.habitaciones.push({
+          id: habitacionData.payload.doc.id,
+          data: habitacionData.payload.doc.data()
         });
-        console.log(habData.payload.doc.data().libre);
+        console.log(habitacionData.payload.doc.data().libre);
       });
     });
   }
